@@ -21,19 +21,20 @@
             <form id="input">
                 <label>City</label>
                 <input name="city" id="city-input"/>
-                <button type="submit" class="btn">Get Forecast</button>
+                <button type="submit" class="btn btn-primary">Get Forecast</button>
             </form>
+
         </div>
 
         <div id="currnet-weather" class="column">
-            <p>City</p>
-            <p>Temp:</p>
-            <p>Wind:</p>
-            <p>Humidity:</p>
-            <p>UV Index:</p>
+            <div id="city-details"></div>
+            <p id="current-temp">Temp:</p>
+            <p id="current-wind">Wind:</p>
+            <p id="curent-hum">Humidity:</p>
+            <p id="current-uv">UV Index:</p>
         </div>
 
-        <div id="forecast" class="column">
+        <div id="future-forecast" class="column">
             <h3>5-Day Forecast:</h3>
             <div class="row">
                 <div id="day1">
