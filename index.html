@@ -18,9 +18,10 @@
     <div class="row">
         <div id="search" class="column">
             <h2>Search For a City:</h2>
-            <form id="text-field">
+            <form id="city-input">
                 <label>City</label>
-                <button></button>
+                <input name="City" id="city"/>
+                <button type="submit" class="btn">Get Forecast</button>
             </form>
         </div>
 
@@ -33,9 +34,32 @@
         </div>
 
         <div id="forecast" class="column">
-            
+            <h3>5-Day Forecast:</h3>
+            <div class="row">
+                <div id="day1">
+
+                </div>
+                <div id="day2">
+
+                </div>
+                <div id="day3">
+
+                </div>
+                <div id="day4">
+
+                </div>
+            </div>
         </div>
     </div>
-
+    <!-- jquery link -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>    
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- link to my js -->
+    <script src="./assets/js/script.js"></script>
 </body>
+
+<footer>
+    <p>&copy; 2022 Jeremy Jakobsons</p>
+</footer>
 </html>
