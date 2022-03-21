@@ -3,6 +3,7 @@ var cityInputEl = document.querySelector("#city-input");
 var putElement = document.querySelector("#input");
 var currentWeatherEl = document.querySelector("#current-weather");
 var cityDetailsEL = document.querySelector("#city-details");
+var futureForecastEl = document.querySelector("#future-forecast");
 // var currentDate = document.getElementById("#current-date");
 // var currentTemp = document.querySelector("#current-temp");
 // var currentWind = document.querySelector("#current-wind");
@@ -89,7 +90,7 @@ function displayWeather (data, city) {
     uvEl.classList = "list-group-item uv";
     currentWeatherEl.appendChild(uvEl);
 
-    forecast(); 
+    forecast(data); 
 };
 
 // function to produce 5 day forecast 
@@ -97,23 +98,31 @@ function forecast (data, city) {
     for (var i = 1; i < 6; i++) {
         var forecastDay = document.createElement("div")
         forecastDay.className = ("card col-2 m-2");
+        futureForecastEl.appendChild(forecastDay);
+        console.log(forecastDay);
+
         var forecastDate = document.createElement("h4");
-        forecastDate.textContent = moment(data.daily[1].dt.value).format("MMMM D, YYYY");
-        console.log(data.daily[0].dt.value);
-        // forecastDate.classList = "card-header";
-        // forecastDay.appendChild(forecastDate);
+        forecastDate.textContent = moment(data.daily[i].dt).format("MMMM D, YYYY");
+        console.log(data.daily[i].dt);
+        forecastDate.classList = "card-header";
+        forecastDay.appendChild(forecastDate);
+
         // var forecastIcon = document.createElement("img");
     
         var forecastTemp = document.createElement("p");
-        forecastTemp.textContent = "Temp: " + data.daily[i].temp + "°F";
+        forecastTemp.textContent = "Temp: " + data.daily[i].temp.max + "°F";
         forecastDate.appendChild(forecastTemp);
+        console.log(data.daily[i].temp.max);
 
         var forecastWind = document.createElement("p");
         forecastWind.textContent = "Wind: " + data.daily[i].wind_speed + " MPH";
         forecastDate.appendChild(forecastWind);
+        console.log(data.daily[i].wind_speed);
+
         var forecastHum = document.createElement("p");
         forecastHum.textContent = "Humidity: " + data.daily[i].humidity + " %";
         forecastDate.appendChild(forecastHum);
+        console.log(data.daily[i].humidity);
     }
 };
 
