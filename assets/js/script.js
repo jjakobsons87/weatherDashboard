@@ -17,6 +17,8 @@ function formSubmitHandler(event) {
     event.preventDefault();
     var city = cityInputEl.value.trim();
     console.log(city);
+
+    savedCities(city);  
     getWeather(city);
     cityInputEl.value = "";
 };
@@ -88,11 +90,25 @@ function displayWeather (data, city) {
     windEl.classList = "list-group-item";
     currentWeatherEl.appendChild(windEl);
 
-    var uvEl = document.createElement("span");
-    uvEl.textContent = "UV: " + data.current.uvi;
-    uvEl.classList = "list-group-item uv";
-    currentWeatherEl.appendChild(uvEl);
+    var uvi = document.createElement("span");
+    var uviValue = data.current.uvi;
+    uvi.textContent = "UVI:" + uviValue;
+    uvi.classList = "list-group-item"
+    uvi.id = "currentUvi";
+    currentWeatherEl.appendChild(uvi);
 
+    var uvEl = function(){
+        if (uviValue >= 8) {
+            document.getElementById("currentUvi").classList = "bg-danger"
+        } else if (uviValue <= 7 && currentUvi >= 3) {
+            document.getElementById("currentUvi").classList = "bg-warning"
+        } else if (uviValue <= 2) {
+            document.getElementById("currentUvi").classList = "bg-success"
+        }
+        console.log(uvEl);
+    }
+    
+    uvEl(currentUvi);
     forecast(data); 
 };
 
@@ -100,30 +116,37 @@ function displayWeather (data, city) {
 function forecast (data, city) {
     for (var i = 1; i < 6; i++) {
         var forecastDay = document.createElement("div")
-        forecastDay.className = ("card col-2 m-2");
+        forecastDay.className = ("card bg-primary text-light col-2 m-2");
         futureForecastEl.appendChild(forecastDay);
         console.log(forecastDay);
 
         var forecastDate = document.createElement("h4");
-        forecastDate.textContent = moment(data.daily[i].dt).format("MMMM D, YYYY");
+        forecastDate.textContent = moment.unix(data.daily[i].dt).format("MMM D, YYYY");
         console.log(data.daily[i].dt);
-        forecastDate.classList = "card-header";
+        forecastDate.classList = "card-header text-center fs-5 text";
         forecastDay.appendChild(forecastDate);
 
-        // var forecastIcon = document.createElement("img");
+        var forecastIcon = document.createElement("img");
+        forecastIcon.classList = "card-body text-center";
+        var icon = data.daily[i].weather[0].icon;
+        forecastIcon.setAttribute("src", 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
+        forecastDate.appendChild(forecastIcon);
     
         var forecastTemp = document.createElement("p");
         forecastTemp.textContent = "Temp: " + data.daily[i].temp.max + "°F";
+        forecastTemp.classList = "card-body text-left fs-5 text";
         forecastDate.appendChild(forecastTemp);
         console.log(data.daily[i].temp.max);
 
         var forecastWind = document.createElement("p");
         forecastWind.textContent = "Wind: " + data.daily[i].wind_speed + " MPH";
+        forecastWind.classList = "card-body text-left fs-5 text";
         forecastDate.appendChild(forecastWind);
         console.log(data.daily[i].wind_speed);
 
         var forecastHum = document.createElement("p");
         forecastHum.textContent = "Humidity: " + data.daily[i].humidity + " %";
+        forecastHum.classList = "card-body text-left fs-5 text";
         forecastDate.appendChild(forecastHum);
         console.log(data.daily[i].humidity);
     }
@@ -133,23 +156,12 @@ var savedCities = function(city) {
     var pastCities = document.createElement("li")
     searchHistoryEl.appendChild(pastCities);
 
-    pastCities.innerHTML = "<button class='btn btn-block'> ${city} </button>"
-    var userSearch = {
-        citySearch: city
-    };
-    savedCity.push(userSearch);
-    localStorage.setItem("city", JSON.stringify(userSearch));
+    pastCities.innerHTML = "<button class='btn btn-info'>" + city + "</button>";
+    
+    var storeCity = localStorage.setItem("city", JSON.stringify(city));
 
-    $(".pastCities").on("click", function() {
-        localStorage.getItem($(this).text());
-        
-        var city = $(this)
-            .text()
-            .trim();
-        getWeather(city);
-    })
+    localStorage.getItem(JSON.stringify(storeCity));    
 };
-
 
 // listen for "get forecast click and run the above"
 putElement.addEventListener("submit", formSubmitHandler);

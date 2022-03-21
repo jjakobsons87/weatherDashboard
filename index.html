@@ -11,16 +11,16 @@
 </head>
 
 <body>
-    <header class="hero row text-center">
+    <header class="row text-center bg-secondary">
         <h1>Weather Dashboard</h1>
     </header>
     
-    <main class="flex-row justify-space-between">
+    <main class="row justify-space-between">
         <div class="col-12 col-md-4"> 
             <div id="search" class="card">
                 <h2 class="card-header">Search For a City:</h2>
                 <form id="input" class="card-body">
-                    <label class="form-label">City</label>
+                    <label class="form-label" for="city">City</label>
                     <input name="city" id="city-input" autofocus="true" class="form-input"/>
                     <button type="submit" class="btn btn-primary">Get Forecast</button>
                 </form>
@@ -29,20 +29,23 @@
             <div class="card">
                 <h2 class="card-header">Search History</h2>
                 <ul class="card-body row btn-group" id="search-history">
-
                 </ul>
             </div>
         </div>
 
         <!--  current/forecast weather card  -->
-        <div class="col-12 col-md-8 futurebox float-right">
-            <h2 class="subtitle">Current weather for: <span id="city-details"></span></h2>
-            <div id="current-weather" class="list-group">
-            </div>
-            <div id="future-forecast" class="column">
-                <h3>5-Day Forecast:</h3>
-                <div id="days" class="row">
-                    
+        <div class="col-12 col-md-8 futurebox">
+            <div class="col border selected-city" id="current-forecast">
+                <div class="col=12">
+                    <h2 class="subtitle">Current weather for: <span id="city-details"></span></h2>
+                    <div id="current-weather" class="list-group">
+                    </div>
+                </div>
+                <div id="future-container" class="col-12 border">
+                        <h3>5-Day Forecast:</h3>
+                        <div id="future-forecast" class="row">
+                            
+                        </div>
                 </div>
             </div>
         </div>
@@ -54,7 +57,7 @@
     <script src="./assets/js/script.js" defer></script>
 </body>
 
-<footer>
+<footer class="row text-center">
     <p>&copy; 2022 Jeremy Jakobsons</p>
 </footer>
 </html>

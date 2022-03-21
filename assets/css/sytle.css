@@ -1,4 +1,21 @@
 img {
     width: 100px;
     height: 100px;
+    float: right;
+}
+
+.futurebox {
+    float: right;
+}
+
+.cardbody {
+    font-size: small;
+}
+
+li {
+    list-style: none;
+}
+
+.btn {
+    display: block;
 }
