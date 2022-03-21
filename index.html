@@ -21,19 +21,21 @@
                 <h2 class="card-header">Search For a City:</h2>
                 <form id="input" class="card-body">
                     <label class="form-label">City</label>
-                    <input name="city" id="city-input" class="form-input"/>
+                    <input name="city" id="city-input" autofocus="true" class="form-input"/>
                     <button type="submit" class="btn btn-primary">Get Forecast</button>
                 </form>
             </div>
             <!-- Search History -->
-            <div class="card" id="search-history">
+            <div class="card">
+                <h2 class="card-header">Search History</h2>
+                <ul class="card-body row btn-group" id="search-history">
 
+                </ul>
             </div>
-            
         </div>
 
         <!--  current/forecast weather card  -->
-        <div class="col-12 col-md-8 float-right">
+        <div class="col-12 col-md-8 futurebox float-right">
             <h2 class="subtitle">Current weather for: <span id="city-details"></span></h2>
             <div id="current-weather" class="list-group">
             </div>

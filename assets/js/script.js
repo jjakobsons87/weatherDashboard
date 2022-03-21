@@ -1,9 +1,12 @@
 const apiKey = "c2f4ea3c03d6375b941699ac5edb328c";
+var city = "";
 var cityInputEl = document.querySelector("#city-input");
 var putElement = document.querySelector("#input");
 var currentWeatherEl = document.querySelector("#current-weather");
 var cityDetailsEL = document.querySelector("#city-details");
 var futureForecastEl = document.querySelector("#future-forecast");
+var searchHistoryEl = document.querySelector("#search-history");
+var savedCity = JSON.parse(localStorage.getItem(city)) || [];
 // var currentDate = document.getElementById("#current-date");
 // var currentTemp = document.querySelector("#current-temp");
 // var currentWind = document.querySelector("#current-wind");
@@ -124,6 +127,27 @@ function forecast (data, city) {
         forecastDate.appendChild(forecastHum);
         console.log(data.daily[i].humidity);
     }
+};
+
+var savedCities = function(city) {
+    var pastCities = document.createElement("li")
+    searchHistoryEl.appendChild(pastCities);
+
+    pastCities.innerHTML = "<button class='btn btn-block'> ${city} </button>"
+    var userSearch = {
+        citySearch: city
+    };
+    savedCity.push(userSearch);
+    localStorage.setItem("city", JSON.stringify(userSearch));
+
+    $(".pastCities").on("click", function() {
+        localStorage.getItem($(this).text());
+        
+        var city = $(this)
+            .text()
+            .trim();
+        getWeather(city);
+    })
 };
 
 
