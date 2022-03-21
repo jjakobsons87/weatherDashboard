@@ -27,7 +27,7 @@ function formSubmitHandler(event) {
 var getWeather = function (city) {
     // get the city long/lat
     var cityLoc =
-        "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
+        "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
     fetch(cityLoc).then(function(response) {
         if(response.ok) {
             response.json().then(function(data) {
